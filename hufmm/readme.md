@@ -1,4 +1,6 @@
-###哈夫曼树的构造
+### 哈夫曼树的构造
+
+
 [![AppVeyor branch](https://img.shields.io/appveyor/ci/gruntjs/grunt/master.svg)]()
 [![SensioLabs Insight](https://img.shields.io/sensiolabs/i/45afb680-d4e6-4e66-93ea-bcfa79eb8a87.svg)]()
 > * 录入权值
@@ -7,7 +9,7 @@
 > * 利用该哈夫曼树将编码结果进行译码，得到的结果保存在文件中；
 
 
-##构造哈夫曼树
+## 构造哈夫曼树
 > * 初始化： 根据给定的n个权值{w1,w2,…wn}构成n棵二叉树的集合F={T1,T2,..,Tn},其中每棵二叉树Ti中只有一个带权wi的根结点,左右子树均空.
 > * 找最小树：在F中选择两棵根结点权值最小的树作为左右子树构造一棵新的二叉树,且至新的二叉树的根结点的权值为其左右子树上根结点的权值之和.
 > * 删除与加入：在F中删除这两棵树,并将新的二叉树加入F中.
