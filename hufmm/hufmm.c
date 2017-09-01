@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define maxN 10
+#define maxN 20
 /*
 Object
 */
@@ -35,27 +35,28 @@ void compare(huffm data[],int n,int *s1,int *s2){
         if(data[i].fc == 0 && i != *s1 && data[i].Weight < data[*s2].Weight) 
             *s2 = i;
    	}
-    printf("%d %d \n",*s1,*s2);
+//    printf("%d %d \n",*s1,*s2);
 }
 
 //写入文件
 void Writofile(huffm data[],int n){
 	FILE *fp;
-	FILE *fp1;
+
 	fp = fopen("code.txt","w+");
-	fp1 = fopen("uncode.txt","w+");
+	printf("编码结果 ：\n");
 	for (int i = 1; i <= n; ++i){
-		fprintf(fp, "%c--------->%s\n",data[i].c,data[i].code);
-		fprintf(fp1,"%s",data[i].code);
+		printf("%c----->%s\n",data[i].c,data[i].code);
+		fprintf(fp,"%s",data[i].code);
 	}
 	fclose(fp);
-	fclose(fp1);
 }
 
 //解码
 void huffmUncod(huffm data[],int n){
 	FILE *fp;
-	fp = fopen("uncode.txt","r");
+	FILE *fp1;
+	fp = fopen("code.txt","r");
+	fp1 = fopen("uncode.txt","w+");	
 	char ch = fgetc(fp);
 
 	int i = 2*n-1;
@@ -68,12 +69,13 @@ void huffmUncod(huffm data[],int n){
 				i = data[i].rc;
 		}
 		if(data[i].lc==0 && data[i].rc==0){
-			printf("%c ", data[i].c);
+			fprintf(fp1,"%c", data[i].c);
 			i=2*n-1;
 		}
 		ch = fgetc(fp);
 	}
 	fclose(fp);
+	fclose(fp1);
 }
 
 //编码
@@ -101,11 +103,8 @@ void huffmcod(huffm data[],int n){
 void Creathuff(huffm data[],int n){
 	int jie = 2 * n - 1;																																									
 	int i,tmp1 = 0,tmp2 = 0;
-	for (i = 1; i <= jie; ++i){
-		data[i].lc = 0;
-		data[i].rc = 0;
-		data[i].fc = 0;	
-	}
+	for (i = 1; i <= jie; ++i)
+		data[i].lc = data[i].rc  = data[i].fc = 0;
 
 	for (i = n + 1 ; i <= jie; ++i){
 		compare(data,i - 1,&tmp1,&tmp2);
@@ -136,13 +135,10 @@ void init(huffm data[],int n){
 		scanf("%d",&data[i].Weight);
 }
 
-int calwpl(hufm data[],int n){
-
-}
-
 int main(){
 	huffm data[maxN];
 	int n;
+	printf("Input n: ");
 	scanf("%d",&n);
 	//初始化
 	init(data,n);
@@ -150,7 +146,10 @@ int main(){
 	Creathuff(data,n);
 	//编码
 	huffmcod(data,n);
+	//写入文件
 	Writofile(data,n);
+	system("pause");
+	//解码
 	huffmUncod(data,n);
 }
 
