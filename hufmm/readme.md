@@ -1,8 +1,5 @@
 ### 哈夫曼树的构造
 
-
-[![AppVeyor branch](https://img.shields.io/appveyor/ci/gruntjs/grunt/master.svg)]()
-[![SensioLabs Insight](https://img.shields.io/sensiolabs/i/45afb680-d4e6-4e66-93ea-bcfa79eb8a87.svg)]()
 > * 录入权值
 > * 构造一棵哈夫曼树；
 > * 利用该哈夫曼树对文件正文进行编码，将编码保存在文件中；
